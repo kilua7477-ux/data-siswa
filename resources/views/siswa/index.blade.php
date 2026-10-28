@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@content
+
 @section('content')
 <div class="row align-items-center mb-4">
     <div class="col-md-6">
