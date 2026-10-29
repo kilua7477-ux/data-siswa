@@ -1,55 +1,137 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="row justify-content-center">
+
     <div class="col-md-8">
-        <div class="card">
-            <div class="card-header bg-white py-3">
-                <h5 class="fw-bold mb-0"><i class="bi bi-person-plus text-primary me-2"></i>Tambah Data Siswa</h5>
+
+        <div class="card shadow-lg border-0 rounded-4">
+
+            <div class="card-header bg-success bg-gradient text-white p-3 rounded-top-4">
+
+                <h5 class="mb-0 fw-bold">
+
+                    <i class="bi bi-person-plus-fill me-2"></i>Tambah Data Siswa Baru
+
+                </h5>
+
             </div>
+
             <div class="card-body p-4">
+
                 <form action="{{ route('siswa.store') }}" method="POST">
+
                     @csrf
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label fw-semibold">NISN</label>
-                            <input type="text" name="nisn" class="form-control @error('nisn') is-invalid @enderror" value="{{ old('nisn') }}" placeholder="Contoh: 10245">
-                            @error('nisn') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label fw-semibold">Nama Lengkap</label>
-                            <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}" placeholder="Masukkan nama siswa">
-                            @error('nama') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                        </div>
+
+                    
+
+                    <div class="mb-3">
+
+                        <label for="nisn" class="form-label fw-semibold">NISN</label>
+
+                        <input type="text" class="form-control @error('nisn') is-invalid @enderror" id="nisn" name="nisn" value="{{ old('nisn') }}" placeholder="Masukkan 10 digit NISN">
+
+                        @error('nisn')
+
+                            <div class="invalid-feedback">{{ $message }}</div>
+
+                        @enderror
+
                     </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label fw-semibold">Kelas</label>
-                            <input type="text" name="kelas" class="form-control @error('kelas') is-invalid @enderror" value="{{ old('kelas') }}" placeholder="Contoh: XI RPL 1">
-                            @error('kelas') <div class="invalid-feedback">{{ $message }}</div> @enderror
+
+                    <div class="mb-3">
+
+                        <label for="nama" class="form-label fw-semibold">Nama Lengkap</label>
+
+                        <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama') }}" placeholder="Masukkan nama lengkap siswa">
+
+                        @error('nama')
+
+                            <div class="invalid-feedback">{{ $message }}</div>
+
+                        @enderror
+
+                    </div>
+
+                    <div class="row mb-3">
+
+                        <div class="col-md-6">
+
+                            <label for="kelas" class="form-label fw-semibold">Kelas</label>
+
+                            <input type="text" class="form-control @error('kelas') is-invalid @enderror" id="kelas" name="kelas" value="{{ old('kelas') }}" placeholder="Contoh: XII RPL 1">
+
+                            @error('kelas')
+
+                                <div class="invalid-feedback">{{ $message }}</div>
+
+                            @enderror
+
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label fw-semibold">Jenis Kelamin</label>
-                            <select name="jenis_kelamin" class="form-select @error('jenis_kelamin') is-invalid @enderror">
-                                <option value="">-- Pilih Jenis Kelamin --</option>
+
+                        <div class="col-md-6">
+
+                            <label for="jenis_kelamin" class="form-label fw-semibold">Jenis Kelamin</label>
+
+                            <select class="form-select @error('jenis_kelamin') is-invalid @enderror" id="jenis_kelamin" name="jenis_kelamin">
+
+                                <option value="" selected disabled>-- Pilih Jenis Kelamin --</option>
+
                                 <option value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki</option>
+
                                 <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan</option>
+
                             </select>
-                            @error('jenis_kelamin') <div class="invalid-feedback">{{ $message }}</div> @enderror
+
+                            @error('jenis_kelamin')
+
+                                <div class="invalid-feedback">{{ $message }}</div>
+
+                            @enderror
+
                         </div>
+
                     </div>
+
                     <div class="mb-4">
-                        <label class="form-label fw-semibold">Alamat</label>
-                        <textarea name="alamat" class="form-control @error('alamat') is-invalid @enderror" rows="3" placeholder="Alamat tempat tinggal siswa">{{ old('alamat') }}</textarea>
-                        @error('alamat') <div class="invalid-feedback">{{ $message }}</div> @enderror
+
+                        <label for="alamat" class="form-label fw-semibold">Alamat Lengkap</label>
+
+                        <textarea class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" rows="3" placeholder="Masukkan alamat lengkap tempat tinggal">{{ old('alamat') }}</textarea>
+
+                        @error('alamat')
+
+                            <div class="invalid-feedback">{{ $message }}</div>
+
+                        @enderror
+
                     </div>
-                    <div class="d-flex justify-content-end gap-2">
-                        <a href="{{ route('siswa.index') }}" class="btn btn-secondary">Batal</a>
-                        <button type="submit" class="btn btn-primary px-4"><i class="bi bi-save me-1"></i> Simpan</button>
+
+                    <div class="d-flex justify-content-between">
+
+                        <a href="{{ route('siswa.index') }}" class="btn btn-outline-secondary px-4 rounded-pill">
+
+                            <i class="bi bi-arrow-left me-1"></i> Kembali
+
+                        </a>
+
+                        <button type="submit" class="btn btn-success bg-gradient px-4 rounded-pill shadow-sm">
+
+                            <i class="bi bi-save me-1"></i> Simpan Data
+
+                        </button>
+
                     </div>
+
                 </form>
+
             </div>
+
         </div>
+
     </div>
+
 </div>
+
 @endsection

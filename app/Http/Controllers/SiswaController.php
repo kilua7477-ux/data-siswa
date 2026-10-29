@@ -26,7 +26,8 @@ class SiswaController extends Controller
         }
 
         $siswas = $query->latest()->paginate(10);
-        return view('siswa.index', compact('siswas'));
+        $dataSiswa = $siswas;
+        return view('siswa.index', compact('siswas', 'dataSiswa'));
     }
 
     public function create()
@@ -47,6 +48,11 @@ class SiswaController extends Controller
         Siswa::create($request->all());
 
         return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil ditambahkan!');
+    }
+
+    public function show(Siswa $siswa)
+    {
+        return view('siswa.show', compact('siswa'));
     }
 
     public function edit(Siswa $siswa)
